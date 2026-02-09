@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Assignment 6</title>
+    <link href="https://cdn.jsdelivr.net/npm/daisyui@5" rel="stylesheet" type="text/css" />
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <link rel="stylesheet" href="styles/style.css">
+</head>
+
+<body class="lato overflow-x-hidden">
+    <header>
+        <!-- navbar section -->
+        <nav class="navbar max-w-[1600px] mx-auto py-5 w-11/12 lg:py-10">
+            <div class="navbar-start">
+                <div class="dropdown">
+                    <div tabindex="0" role="button" class="btn btn-ghost lg:hidden">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24"
+                            stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M4 6h16M4 12h8m-8 6h16" />
+                        </svg>
+                    </div>
+                    <ul tabindex="-1"
+                        class="menu menu-sm dropdown-content bg-base-100 rounded-box z-1 mt-3 w-52 p-2 shadow">
+                        <li><a>Home</a></li>
+                        <li><a>Shop</a></li>
+                        <li><a>Contact</a></li>
+                    </ul>
+                </div>
+                <h3 class="hidden lg:flex gap-3 items-center font-black text-[32px] text-[#131313]">
+                    <img src="images/logo.webp" alt="">Peddy
+                </h3>
+            </div>
+            <div class="navbar-center hidden lg:flex">
+                <ul class="menu menu-horizontal px-1">
+                    <li><a>Home</a></li>
+                    <li>
+                        <summary>Shop</summary>
+                    </li>
+                    <li><a>Contact</a></li>
+                </ul>
+            </div>
+            <div class="navbar-center lg:hidden">
+                <h3 class="flex gap-3 items-center font-black text-[32px] text-[#131313]">
+                    <img src="images/logo.webp" alt="">Peddy
+                </h3>
+            </div>
+            <div class="navbar-end">
+                <div class="avatar">
+                    <a href="" class="w-10 rounded-full mr-1">
+                        <img src="https://img.icons8.com/?size=100&id=ckaioC1qqwCu&format=png&color=000000" />
+                    </a>
+                </div>
+            </div>
+        </nav>
+
+        <!-- banner section -->
+        <section>
+            <div class="hero mb-10 lg:mb-16">
+                <div class="hero-content text-center">
+                    <div class="max-w-screen-2xl w-10/12">
+                        <p class="font-bold text-xl pb-4 text-[rgba(19,19,19,0.6)] lg:text-2xl">Bringing Families
+                            Together ❤️</p>
+                        <h1 class="text-4xl font-black md:text-6xl md:leading-[70px] lg:leading-[88px] lg:text-7xl">Your
+                            Path to Adoption Starts Here</h1>
+                        <p class="py-6">Welcome to your new best friend. Your pet adoption journey starts here.
+                        </p>
+                        <button class="btn bg-[#0E7A81] text-white rounded-xl"><a href="#best-friend">View
+                                More</a></button>
+                        <img src="images/pet.webp" alt="">
+                    </div>
+                </div>
+            </div>
+        </section>
+    </header>
+
+    <main>
+        <!-- adopt best friend section -->
+        <section id="best-friend" class="max-w-[1600px] w-11/12 mx-auto mb-8">
+            <div class="text-center mb-8">
+                <h3 class="font-black mb-2 text-3xl lg:text-[40px]">Adopt Your Best Friend</h3>
+                <p class="text-[rgba(19,19,19,0.7)]">Your loyal companion is waiting to meet you. Begin your story of
+                    unconditional love here.</p>
+            </div>
+
+            <div id="adopt-category"
+                class="grid grid-cols-2 gap-2 m-4 md:m-8 md:grid-cols-4 md:gap-6 lg:m-8 lg:grid-cols-4 lg:gap-6">
+            </div>
+
+            <div class="flex justify-between px-3 mb-8">
+                <h4 class="font-black text-xl md:text-2xl lg:text-2xl">Best Deal For you</h4>
+                <button onclick="sorting()" class="btn bg-[#0E7A81] text-white rounded-xl">Sort by
+                    Price</button>
+            </div>
+
+            <!-- spinner -->
+            <div class="flex justify-center items-center">
+                <span id="spin" class="loading loading-bars loading-md min-h-screen hidden"></span>
+            </div>
+
+            <div id="category-container"
+                class="category-container grid grid-cols-[1fr_120px] gap-4 lg:grid-cols-[4fr_280px]">
+                <div id="adopt" class="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3">
+                </div>
+                <div id="favorite"
+                    class="p-2 grid gap-2 auto-rows-min shadow-xl border-[rgba(19,19,19,0.1)] rounded-xl w-11/12 md:w-full lg:grid-cols-2  lg:w-full">
+                </div>
+            </div>
+        </section>
+
+        <!-- details modal section -->
+        <section>
+            <dialog id="detailModal" class="modal">
+                <div class="modal-box">
+                    <div id="detailContent"></div>
+                    <form method="dialog">
+                        <button
+                            class="btn w-full bg-[rgba(14,122,129,0.1)] border-2 border-[rgba(9,115,122,0.34)] text-[#0E7A81] mt-4 hover:bg-[#0E7A81] hover:text-white">Close</button>
+                    </form>
+                </div>
+            </dialog>
+        </section>
+
+        <!-- adopt modal section -->
+        <section class="text-center">
+            <dialog id="adoptModal" class="modal modal-middle">
+                <div class="modal-box w-3/4 max-w-5xl md:w-2/3 lg:w-2/5">
+                    <h3 class="text-3xl font-bold py-3">Congrates</h3>
+                    <p>Adoption Process is Start For Your Pet</p>
+                    <p class="py-3" id="countdown"></p>
+                </div>
+                </div>
+            </dialog>
+        </section>
+    </main>
+
+    <footer
+        class="footer max-w-[1600px] mx-auto flex justify-evenly flex-col lg:flex-row p-10 bg-[#131313] md:py-10 md:px-20 md:gap-10 lg:px-52 lg:py-24">
+        <nav>
+            <div class="flex flex-col mb-3">
+                <h3 class="flex gap-3 items-center font-black text-[32px] text-white mb-6">
+                    <img src="images/logo.webp" alt="">Peddy
+                </h3>
+                <a class="link link-hover text-[rgba(255,255,255,0.9)]">Location: av. Washington 165, NY CA 54003</a>
+                <a class="link link-hover text-[rgba(255,255,255,0.9)]">Phone: +31 85 964 47 25</a>
+                <a class="link link-hover text-[rgba(255,255,255,0.9)]">Email: info@yourdomain.com</a>
+                <a class="link link-hover text-[rgba(255,255,255,0.9)]">Openings hours: 9.00 AM - 5.00 PM</a>
+            </div>
+            <div class="flex gap-6 justify-center items-center">
+                <div>
+                    <svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path fill-rule="evenodd" clip-rule="evenodd"
+                            d="M16 0C24.8365 0 32 7.16346 32 16C32 24.8365 24.8365 32 16 32C7.16346 32 0 24.8365 0 16C0 7.16346 7.16346 0 16 0Z"
+                            fill="url(#paint0_linear_12_856)" />
+                        <path
+                            d="M18.0789 31.8658V19.5071H21.5631L22.0249 15.1574H18.0789L18.0848 12.9802C18.0848 11.8457 18.1926 11.2381 19.8221 11.2381H22.0005V6.8877H18.5156C14.3295 6.8877 12.8564 8.99765 12.8564 12.5465V15.1577H10.247V19.5078H12.8564V31.6905C13.873 31.8931 14.9239 32.0001 16 32.0001C16.6952 32.0001 17.3896 31.9552 18.0789 31.8658Z"
+                            fill="white" />
+                        <defs>
+                            <linearGradient id="paint0_linear_12_856" x1="16" y1="-0.291536" x2="16" y2="33.3645"
+                                gradientUnits="userSpaceOnUse">
+                                <stop stop-color="#00B2FF" />
+                                <stop offset="1" stop-color="#006AFF" />
+                            </linearGradient>
+                        </defs>
+                    </svg>
+                </div>
+                <div>
+                    <svg width="31" height="28" viewBox="0 0 31 28" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <g clip-path="url(#clip0_12_871)">
+                            <path
+                                d="M24.3934 0.00170898H29.1429L18.7667 11.861L30.9735 27.9989H21.4157L13.9296 18.2113L5.36398 27.9989H0.611602L11.71 15.314L0 0.00170898H9.80037L16.5671 8.9479L24.3934 0.00170898ZM22.7265 25.1561H25.3582L8.37045 2.69516H5.54629L22.7265 25.1561Z"
+                                fill="white" />
+                        </g>
+                        <defs>
+                            <clipPath id="clip0_12_871">
+                                <rect width="30.9735" height="28" fill="white" />
+                            </clipPath>
+                        </defs>
+                    </svg>
+                </div>
+                <div>
+                    <svg width="46" height="32" viewBox="0 0 46 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path fill-rule="evenodd" clip-rule="evenodd"
+                            d="M44.7635 4.9964C44.2399 3.03268 42.6908 1.48374 40.7199 0.952823C37.1563 0 22.8582 0 22.8582 0C22.8582 0 8.56733 0 4.9964 0.952823C3.03287 1.47641 1.48374 3.02554 0.952823 4.9964C-8.96137e-08 8.56 0 15.9999 0 15.9999C0 15.9999 -8.96137e-08 23.44 0.952823 27.0036C1.47641 28.9673 3.02554 30.5163 4.9964 31.0472C8.56733 32 22.8582 32 22.8582 32C22.8582 32 37.1563 32 40.7199 31.0472C42.6836 30.5236 44.2326 28.9745 44.7635 27.0036C45.7163 23.44 45.7163 16.0001 45.7163 16.0001C45.7163 16.0001 45.7163 8.56 44.7635 4.9964Z"
+                            fill="#FF0000" />
+                        <path fill-rule="evenodd" clip-rule="evenodd"
+                            d="M18.291 22.8582L30.1673 15.9999L18.291 9.14185V22.8582Z" fill="white" />
+                    </svg>
+                </div>
+                <div>
+                    <svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <g clip-path="url(#clip0_12_888)">
+                            <path
+                                d="M10.6682 16C10.6682 13.0546 13.0552 10.6662 16.0006 10.6662C18.946 10.6662 21.3344 13.0546 21.3344 16C21.3344 18.9454 18.946 21.3338 16.0006 21.3338C13.0552 21.3338 10.6682 18.9454 10.6682 16ZM7.78483 16C7.78483 20.5376 11.463 24.2158 16.0006 24.2158C20.5382 24.2158 24.2164 20.5376 24.2164 16C24.2164 11.4624 20.5382 7.78419 16.0006 7.78419C11.463 7.78419 7.78483 11.4624 7.78483 16ZM22.6217 7.45843C22.6215 7.83817 22.734 8.20943 22.9448 8.52526C23.1557 8.84108 23.4555 9.08729 23.8062 9.23275C24.157 9.37821 24.543 9.41639 24.9155 9.34246C25.288 9.26852 25.6302 9.0858 25.8988 8.81739C26.1674 8.54898 26.3504 8.20694 26.4247 7.83453C26.4989 7.46211 26.461 7.07605 26.3158 6.72516C26.1707 6.37426 25.9247 6.0743 25.609 5.8632C25.2934 5.65211 24.9222 5.53935 24.5425 5.5392H24.5417C24.0327 5.53944 23.5446 5.74169 23.1846 6.10155C22.8246 6.4614 22.6221 6.94942 22.6217 7.45843ZM9.53664 29.0236C7.9767 28.9526 7.12883 28.6927 6.56538 28.4732C5.81837 28.1824 5.28538 27.836 4.72499 27.2764C4.16461 26.7168 3.81773 26.1843 3.52819 25.4373C3.30854 24.8741 3.0487 24.026 2.97779 22.466C2.90022 20.7795 2.88474 20.2729 2.88474 16.0001C2.88474 11.7274 2.9015 11.2221 2.97779 9.53421C3.04883 7.97427 3.31059 7.12781 3.52819 6.56294C3.81901 5.81594 4.16538 5.28294 4.72499 4.72256C5.28461 4.16218 5.81709 3.8153 6.56538 3.52576C7.12858 3.30611 7.9767 3.04627 9.53664 2.97536C11.2232 2.89779 11.7298 2.8823 16.0006 2.8823C20.2715 2.8823 20.7786 2.89907 22.4666 2.97536C24.0265 3.0464 24.873 3.30816 25.4378 3.52576C26.1848 3.8153 26.7178 4.16294 27.2782 4.72256C27.8386 5.28218 28.1842 5.81594 28.475 6.56294C28.6947 7.12614 28.9545 7.97427 29.0254 9.53421C29.103 11.2221 29.1185 11.7274 29.1185 16.0001C29.1185 20.2729 29.103 20.7781 29.0254 22.466C28.9544 24.026 28.6932 24.8739 28.475 25.4373C28.1842 26.1843 27.8378 26.7173 27.2782 27.2764C26.7186 27.8355 26.1848 28.1824 25.4378 28.4732C24.8746 28.6929 24.0265 28.9527 22.4666 29.0236C20.78 29.1012 20.2734 29.1167 16.0006 29.1167C11.7279 29.1167 11.2227 29.1012 9.53664 29.0236ZM9.40416 0.096896C7.70086 0.174464 6.53696 0.444544 5.52051 0.840064C4.46784 1.24851 3.5767 1.79648 2.68621 2.68557C1.79571 3.57466 1.24915 4.4672 0.840705 5.51987C0.445185 6.53696 0.175105 7.70022 0.0975369 9.40352C0.0186889 11.1095 0.000640869 11.6549 0.000640869 16C0.000640869 20.3451 0.0186889 20.8905 0.0975369 22.5965C0.175105 24.2999 0.445185 25.463 0.840705 26.4801C1.24915 27.5322 1.79584 28.4257 2.68621 29.3144C3.57658 30.2031 4.46784 30.7503 5.52051 31.1599C6.53888 31.5555 7.70086 31.8255 9.40416 31.9031C11.111 31.9807 11.6556 32 16.0006 32C20.3457 32 20.8911 31.982 22.5971 31.9031C24.3005 31.8255 25.4637 31.5555 26.4808 31.1599C27.5328 30.7503 28.4246 30.2035 29.3151 29.3144C30.2056 28.4253 30.751 27.5322 31.1606 26.4801C31.5561 25.463 31.8275 24.2998 31.9037 22.5965C31.9813 20.8892 31.9994 20.3451 31.9994 16C31.9994 11.6549 31.9813 11.1095 31.9037 9.40352C31.8262 7.7001 31.5561 6.53632 31.1606 5.51987C30.751 4.46784 30.2042 3.57606 29.3151 2.68557C28.426 1.79507 27.5328 1.24851 26.482 0.840064C25.4637 0.444544 24.3004 0.173184 22.5984 0.096896C20.8924 0.019328 20.347 0 16.0019 0C11.6568 0 11.111 0.018048 9.40416 0.096896Z"
+                                fill="url(#paint0_radial_12_888)" />
+                            <path
+                                d="M10.6682 16C10.6682 13.0546 13.0552 10.6662 16.0006 10.6662C18.946 10.6662 21.3344 13.0546 21.3344 16C21.3344 18.9454 18.946 21.3338 16.0006 21.3338C13.0552 21.3338 10.6682 18.9454 10.6682 16ZM7.78483 16C7.78483 20.5376 11.463 24.2158 16.0006 24.2158C20.5382 24.2158 24.2164 20.5376 24.2164 16C24.2164 11.4624 20.5382 7.78419 16.0006 7.78419C11.463 7.78419 7.78483 11.4624 7.78483 16ZM22.6217 7.45843C22.6215 7.83817 22.734 8.20943 22.9448 8.52526C23.1557 8.84108 23.4555 9.08729 23.8062 9.23275C24.157 9.37821 24.543 9.41639 24.9155 9.34246C25.288 9.26852 25.6302 9.0858 25.8988 8.81739C26.1674 8.54898 26.3504 8.20694 26.4247 7.83453C26.4989 7.46211 26.461 7.07605 26.3158 6.72516C26.1707 6.37426 25.9247 6.0743 25.609 5.8632C25.2934 5.65211 24.9222 5.53935 24.5425 5.5392H24.5417C24.0327 5.53944 23.5446 5.74169 23.1846 6.10155C22.8246 6.4614 22.6221 6.94942 22.6217 7.45843ZM9.53664 29.0236C7.9767 28.9526 7.12883 28.6927 6.56538 28.4732C5.81837 28.1824 5.28538 27.836 4.72499 27.2764C4.16461 26.7168 3.81773 26.1843 3.52819 25.4373C3.30854 24.8741 3.0487 24.026 2.97779 22.466C2.90022 20.7795 2.88474 20.2729 2.88474 16.0001C2.88474 11.7274 2.9015 11.2221 2.97779 9.53421C3.04883 7.97427 3.31059 7.12781 3.52819 6.56294C3.81901 5.81594 4.16538 5.28294 4.72499 4.72256C5.28461 4.16218 5.81709 3.8153 6.56538 3.52576C7.12858 3.30611 7.9767 3.04627 9.53664 2.97536C11.2232 2.89779 11.7298 2.8823 16.0006 2.8823C20.2715 2.8823 20.7786 2.89907 22.4666 2.97536C24.0265 3.0464 24.873 3.30816 25.4378 3.52576C26.1848 3.8153 26.7178 4.16294 27.2782 4.72256C27.8386 5.28218 28.1842 5.81594 28.475 6.56294C28.6947 7.12614 28.9545 7.97427 29.0254 9.53421C29.103 11.2221 29.1185 11.7274 29.1185 16.0001C29.1185 20.2729 29.103 20.7781 29.0254 22.466C28.9544 24.026 28.6932 24.8739 28.475 25.4373C28.1842 26.1843 27.8378 26.7173 27.2782 27.2764C26.7186 27.8355 26.1848 28.1824 25.4378 28.4732C24.8746 28.6929 24.0265 28.9527 22.4666 29.0236C20.78 29.1012 20.2734 29.1167 16.0006 29.1167C11.7279 29.1167 11.2227 29.1012 9.53664 29.0236ZM9.40416 0.096896C7.70086 0.174464 6.53696 0.444544 5.52051 0.840064C4.46784 1.24851 3.5767 1.79648 2.68621 2.68557C1.79571 3.57466 1.24915 4.4672 0.840705 5.51987C0.445185 6.53696 0.175105 7.70022 0.0975369 9.40352C0.0186889 11.1095 0.000640869 11.6549 0.000640869 16C0.000640869 20.3451 0.0186889 20.8905 0.0975369 22.5965C0.175105 24.2999 0.445185 25.463 0.840705 26.4801C1.24915 27.5322 1.79584 28.4257 2.68621 29.3144C3.57658 30.2031 4.46784 30.7503 5.52051 31.1599C6.53888 31.5555 7.70086 31.8255 9.40416 31.9031C11.111 31.9807 11.6556 32 16.0006 32C20.3457 32 20.8911 31.982 22.5971 31.9031C24.3005 31.8255 25.4637 31.5555 26.4808 31.1599C27.5328 30.7503 28.4246 30.2035 29.3151 29.3144C30.2056 28.4253 30.751 27.5322 31.1606 26.4801C31.5561 25.463 31.8275 24.2998 31.9037 22.5965C31.9813 20.8892 31.9994 20.3451 31.9994 16C31.9994 11.6549 31.9813 11.1095 31.9037 9.40352C31.8262 7.7001 31.5561 6.53632 31.1606 5.51987C30.751 4.46784 30.2042 3.57606 29.3151 2.68557C28.426 1.79507 27.5328 1.24851 26.482 0.840064C25.4637 0.444544 24.3004 0.173184 22.5984 0.096896C20.8924 0.019328 20.347 0 16.0019 0C11.6568 0 11.111 0.018048 9.40416 0.096896Z"
+                                fill="url(#paint1_radial_12_888)" />
+                        </g>
+                        <defs>
+                            <radialGradient id="paint0_radial_12_888" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse"
+                                gradientTransform="translate(4.25203 32.1512) scale(41.7733 41.7733)">
+                                <stop offset="0.09" stop-color="#FA8F21" />
+                                <stop offset="0.78" stop-color="#D82D7E" />
+                            </radialGradient>
+                            <radialGradient id="paint1_radial_12_888" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse"
+                                gradientTransform="translate(19.4072 33.5848) scale(32.9231)">
+                                <stop offset="0.64" stop-color="#8C3AAA" stop-opacity="0" />
+                                <stop offset="1" stop-color="#8C3AAA" />
+                            </radialGradient>
+                            <clipPath id="clip0_12_888">
+                                <rect width="32" height="32" fill="white" />
+                            </clipPath>
+                        </defs>
+                    </svg>
+                </div>
+            </div>
+        </nav>
+        <div class="flex gap-12 w-80 md:justify-between md:w-full lg:justify-evenly lg:w-full">
+            <nav>
+                <h6 class="font-bold text-lg text-[rgba(255,255,255,0.9)]">Useful Links</h6>
+                <div class="flex flex-col">
+                    <a class="link link-hover text-[rgba(255,255,255,0.6)]">Home</a>
+                    <a class="link link-hover text-[rgba(255,255,255,0.6)]">About Us</a>
+                    <a class="link link-hover text-[rgba(255,255,255,0.6)]">Animals</a>
+                    <a class="link link-hover text-[rgba(255,255,255,0.6)]">Foundation</a>
+                    <a class="link link-hover text-[rgba(255,255,255,0.6)]">Contact</a>
+                </div>
+            </nav>
+            <form>
+                <h6 class="font-bold text-lg text-[rgba(255,255,255,0.9)] mb-2">Drop a Message</h6>
+                <fieldset>
+                    <div class="flex flex-col">
+                        <input type="text" placeholder="Enter your email"
+                            class="input input-bordered bg-[rgba(255,255,255,0.05)] text-[rgba(255,255,255,0.6)] w-40 mb-4 md:w-60 lg:w-60" />
+                        <button
+                            class="btn bg-[#0E7A81] text-white border-none w-40 rounded-xl md:w-60 lg:w-60">Subscribe</button>
+                    </div>
+                </fieldset>
+            </form>
+        </div>
+    </footer>
+    <script src="js/categori.js"></script>
+</body>
+
+</html>
