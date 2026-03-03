@@ -134,7 +134,7 @@ const displayPets = (pets) => {
     pets.forEach(pet => {
         // console.log(pet);
         const card = document.createElement('div');
-        card.classList.add('rounded-xl', 'w-full', 'shadow-sm');
+        card.classList.add('rounded-xl', 'w-full', 'shadow-sm', 'bg-white');
         card.innerHTML = `
             <figure class="p-2 md:p-5 lg:p-5">
             <img src="${pet.image}" class="rounded-xl w-full h-40" />
