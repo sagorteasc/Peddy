@@ -46,12 +46,6 @@ const loadPetCategories = async (id) => {
     try {
         const res = await fetch(`https://openapi.programming-hero.com/api/peddy/category/${id}`)
         const data = await res.json()
-        // removeActiveBtn();
-        // const activeBtn = document.getElementById(`btn-${id}`);
-        // // console.log(activeBtn);
-        // activeBtn.classList.add('bg-[rgba(14,122,129,0.1)]')
-        // activeBtn.classList.add('border-2');
-        // activeBtn.classList.add('rounded-[120px]');
         allPets = data.data;
         displayPets(data.data);
         document.getElementById('spin').classList.add('hidden');
@@ -184,10 +178,9 @@ const displayPets = (pets) => {
 //  favorite display
 const favDisplay = (image) => {
     const favContainer = document.getElementById('favorite');
-    const div = document.createElement('div')
-    // div.classList.add('mb-2')
+    const div = document.createElement('div');
     div.innerHTML = `
-            <img class="w-full h-20 object-cover rounded-xl lg:h-full" src="${image}" />
+            <img class="w-fit h-20 object-contain rounded-xl lg:h-full" src="${image}" />
     `
     favContainer.append(div)
 }
