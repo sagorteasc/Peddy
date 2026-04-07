@@ -6,6 +6,13 @@ Peddy is a responsive pet adoption web application that fetches and displays rea
 
 ---
 
+## 🔗 Links
+
+- Live Demo: https://sagorteasc-peddy.vercel.app/
+- GitHub: https://github.com/sagorteasc/Peddy
+
+---
+
 ## 🌐 Project Overview
 
 Peddy allows users to:
@@ -14,7 +21,6 @@ Peddy allows users to:
 - View pet details
 - Filter pets by category
 - Interact with real API data
-
 
 ---
 
